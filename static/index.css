@@ -1,0 +1,240 @@
+/* Estilos generales de la página */
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+.header-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: black;
+  color: #ccc;
+  justify-content: center;
+  padding: 10px;
+}
+
+.header-container h1,
+.header-container h2 {
+  font-size: 1.5rem;
+  padding: 0.5rem;
+}
+
+.name-project-container {
+  background-color: goldenrod;
+  font-style: bold;
+  padding: 20px 20px 20px 50px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  background-color: goldenrod;
+}
+
+.sidebar {
+  float: left;
+  width: 20%;
+  background: #f8d929;
+  padding: 20px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.main-btn {
+  width: 150px;
+  background-color: black;
+  color: azure;
+  font-weight: bold;
+  margin: 5px;
+  padding: 5px;
+  border-radius: 6px;
+  border-style: none;
+  cursor: pointer;
+}
+
+.secondary-btn {
+  width: 75px;
+  background-color: greenyellow;
+  border: 2px solid black;
+  color: rgb(0, 0, 0);
+  font-weight: 900;
+  margin: 5px 0;
+  padding: 1px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#charge_expense,
+#delete_expense,
+#update_expense,
+#put_expense {
+  display: none;
+  /* Oculta los formularios */
+}
+
+.main {
+  float: left;
+  width: 75%;
+  background: #f8e682;
+  padding: 20px;
+}
+
+.expense-grid {
+  display: grid;
+  grid-template-columns: 0.5fr 1fr 1.5fr 1fr 1fr 1fr;
+  gap: 10px;
+}
+
+.expense-header,
+.expense-item {
+  display: contents;
+}
+
+.expense-header div,
+.expense-item div {
+  padding: 10px;
+  border: 1px solid #ddd;
+  background: #f9f9f9;
+  border-radius: 5px;
+}
+
+.expense-header div {
+  font-weight: bold;
+  background: #e0e0e0;
+}
+
+/* Estilo del Formulario de POST Expenses */
+
+#charge_expense_form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 10px;
+  margin: 10px;
+  background: #f8f8f8;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+#charge_expense_form h4 {
+  font-weight: 900;
+  /*font-style: italic;*/
+  font-size: 0.7rem;
+  padding: 5px 2px 5px 2px;
+  margin: 0 0 10px 0;
+  background: #f8d929;
+  border-radius: 5px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  text-align: initial;
+}
+
+.form-group label {
+  margin-bottom: 1px;
+  font-weight: bold;
+  color: black;
+  font-size: 0.8rem;
+}
+
+.form-group input,
+.form-group select {
+  padding: 3px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 0.8rem;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Estilo del Formulario de PUT Expenses */
+
+#update_expense_form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f8f8f8;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#update_expense_form h4 {
+  font-weight: 900;
+  font-size: 1rem;
+  padding: 5px;
+  margin-bottom: 10px;
+  background: #f8d929;
+  border-radius: 5px;
+}
+
+/* Estilo del Formulario de DELETE Expenses */
+
+#delete_expense_form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f8f8f8;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#delete_expense_form h4 {
+  font-weight: 900;
+  font-size: 1rem;
+  padding: 5px;
+  margin-bottom: 10px;
+  background: #f8d929;
+  border-radius: 5px;
+}
+
+#delete_expense_form .form-group {
+  display: flex;
+  flex-direction: column;
+  text-align: initial;
+}
+
+#delete_expense_form .form-group label {
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: black;
+  font-size: 0.8rem;
+}
+
+#delete_expense_form .form-group input {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 0.8rem;
+}
+
+#delete_expense_form .form-group input:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}

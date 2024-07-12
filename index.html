@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./static/index.css">
+    <title>Expense Tracker</title>
+</head>
+
+<body>
+    <header class="header-container">
+        <h1>Codo A Codo | Trabajo Final - BACKEND (python)</h1>
+        <h2>TEAM 5</h2>
+        <p>Integrantes: Barbara Tissera | Guillermo Boccardo | Paula Jimena Ruiz | Sergio Manzaraz</p>
+    </header>
+
+    <div class="name-project-container">
+        <h3>API-Expense tracker > Gestion de una BBDD que registra los gastos corrientes.</h3>
+    </div>
+
+    <div class="container">
+
+        <div class="sidebar">
+
+            <h2>API Actions</h2>
+
+            <ul>
+                <li><button class="main-btn" id="btn-get">GET Expenses</button></li>
+                <li><button class="main-btn" id="btn-post-form">POST Expense</button></li>
+                <li><button class="main-btn" id="btn-put-form">PUT Expense</button></li>
+                <li><button class="main-btn" id="btn-delete-form">DELETE Expense</button></li>
+            </ul>
+
+            <section id="charge_expense">
+                <form id="charge_expense_form">
+                    <h4>Ingresar los siguientes datos</h4>
+                    <div class="form-group">
+                        <label>Categoria:</label>
+                        <select name="category">
+                            <option value="FOOD">Food</option>
+                            <option value="TRANSPORT">Transport</option>
+                            <option value="HEALTH">Health</option>
+                            <option value="ENTERTAINMENT">Entertainment</option>
+                            <option value="EDUCATION">Education</option>
+                            <option value="SERVICES">Services</option>
+                            <option value="GENERAL">General</option>
+                            <option value="OTHER">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Detalle:</label>
+                        <input type="text" name="expense_detail" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Ingresar divisa:</label>
+                        <select name="currency">
+                            <option value="USD">US Dollar</option>
+                            <option value="EUR">Euro</option>
+                            <option value="ARS">Argentine Peso</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Importe:</label>
+                        <input type="number" name="amount" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Fecha:</label>
+                        <input type="date" name="date" required>
+                    </div>
+                    <button class="secondary-btn" id="btn-post" type="submit">SUBMIT</button>
+                </form>
+                <button class="secondary-btn" id="btn-close-form">CLOSE</button>
+            </section>
+
+            <section id="update_expense">
+                <form id="update_expense_form">
+                    <h4>Actualizar Gasto</h4>
+                    <div class="form-group">
+                        <label>Expense ID:</label>
+                        <input type="number" name="expense_id" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Nueva Categoría:</label>
+                        <select name="category">
+                            <option value="FOOD">Food</option>
+                            <option value="TRANSPORT">Transport</option>
+                            <option value="HEALTH">Health</option>
+                            <option value="ENTERTAINMENT">Entertainment</option>
+                            <option value="EDUCATION">Education</option>
+                            <option value="SERVICES">Services</option>
+                            <option value="GENERAL">General</option>
+                            <option value="OTHER">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Nuevo Detalle:</label>
+                        <input type="text" name="expense_detail" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Nueva Divisa:</label>
+                        <select name="currency">
+                            <option value="USD">US Dollar</option>
+                            <option value="EUR">Euro</option>
+                            <option value="ARS">Argentine Peso</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Nuevo Importe:</label>
+                        <input type="number" name="amount" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Nueva Fecha:</label>
+                        <input type="date" name="date" required>
+                    </div>
+                    <button class="secondary-btn" id="btn-put" type="submit">UPDATE</button>
+                </form>
+                <button class="secondary-btn" id="btn-close-put-form">CLOSE</button>
+            </section>
+
+            <section id="delete_expense">
+                <form id="delete_expense_form">
+                    <h4>Eliminar Gasto</h4>
+                    <div class="form-group">
+                        <label>Expense ID:</label>
+                        <input type="number" name="expense_id" required>
+                    </div>
+                    <button class="secondary-btn" id="btn-delete" type="submit">DELETE</button>
+                </form>
+                <button class="secondary-btn" id="btn-close-delete-form">CLOSE</button>
+            </section>
+
+        </div>
+
+        <div class="main">
+            <h2>Expense Data</h2>
+            <button class="secondary-btn" id="btn-clean-board">CLEAN</button>
+            <div id="expenseData" class="expense-grid"></div>
+        </div>
+
+    </div>
+
+    <script src="./static/index.js"></script>
+
+</body>
+
+</html>
