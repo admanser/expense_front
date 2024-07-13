@@ -1,7 +1,7 @@
-const HOST = "admanser.pythonanywhere.com";
-const PORT = 80;
+const HOST = "localhost";
+const PORT = 8000;
 const apiUrl = `http://${HOST}:${PORT}/api/expense/`;
-// const apiUrl = 'http://127.0.0.1:8000/api/expense/'
+//const apiUrl = 'http://127.0.0.1:8000/api/expense/'
 
 // GET //
 
@@ -211,54 +211,58 @@ formPutSection.addEventListener("submit", function (event) {
 
 // DELETE //
 
-const btnDeleteExpense = document.getElementById("btn-delete"); // Selección del botón para eliminar un gasto
+const btnDeleteForm = document.getElementById("btn-delete-form"); // Selección del botón para mostrar el formulario
+const btnCloseDeleteForm = document.getElementById("btn-close-delete-form"); // Selección del botón para ocultar el formulario
+const formDeleteSection = document.getElementById("delete_expense"); // Selección de la seccion formulario
+const Deleteform = document.getElementById("Delete_expense_form"); // Selección del formulario
 
-// btnDeleteExpense.addEventListener("click", () => {
-//   formSection.style.display = "none"; // Cambiar el estilo del formulario para ocultarlo
-// });
+btnDeleteForm.addEventListener("click", () => {
+  formDeleteSection.style.display = "block"; // Cambiar el estilo del formulario para mostrarlo
+});
 
+btnCloseDeleteForm.addEventListener("click", () => {
+  formDeleteSection.style.display = "none"; // Cambiar el estilo del formulario para ocultarlo
+});
+
+const btnDelete = document.getElementById("btn-delete"); // Obtenemos la referencia al botón de envío del formulario
+
+// Definimos la función para eleminar un registro de gasto
 function deleteExpense() {
-  const expenseId = prompt("Enter Expense ID to delete:");
+  let form = document.getElementById("delete_expense_form");
+  let formData = new FormData(form);
+  let expenseId = formData.get("expense_id");
 
-  btnDeleteForm.addEventListener("click", () => {
-    formDeleteSection.style.display = "block"; // Cambiar el estilo del formulario para mostrarlo
-  });
-
-  btnCloseDeleteForm.addEventListener("click", () => {
-    formDeleteSection.style.display = "none"; // Cambiar el estilo del formulario para ocultarlo
-  });
-
-  const btnDelete = document.getElementById("btn-delete"); // Obtenemos la referencia al botón de envío del formulario
-
-  // Definimos la función para eleminar un registro de gasto
-  function deleteExpense() {
-    let form = document.getElementById("delete_expense_form");
-    let formData = new FormData(form);
-    let expenseId = formData.get("expense_id");
-
-    fetch(`${apiUrl}${expenseId}/`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }).then((response) => {
-      alert("Expense deleted!");
-      //fetchExpenses();
+  fetch(`${apiUrl}${expenseId}/`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error("Network response was not ok " + response.statusText);
+      }
+      alert("Expense deleted successfully!");
+      form.reset(); // Limpiamos el formulario después de enviar los datos
+      //fetchExpenses(); // Llamamos a una función para actualizar la lista de gastos
+    })
+    .catch((error) => {
+      console.error("There was a problem with the fetch operation:", error);
+      alert("There was an error deleting the expense. Please try again.");
     });
-  }
-
-  // Añadimos el listener para el botón de envío del formulario
-  btnDelete.addEventListener("click", (e) => {
-    e.preventDefault(); // Evitamos el comportamiento predeterminado de enviar el formulario y recargar la página
-    deleteExpense(); // Llamamos a la función para borrar el gasto
-  });
-
-  // ACCIONES PARA LA PIZARRA //
-
-  const btnCleanBoard = document.getElementById("btn-clean-board"); // Selección del botón para borrar la pizarra
-
-  btnCleanBoard.addEventListener("click", () => {
-    let container = document.getElementById("expenseData");
-    container.innerHTML = "";
-  });
 }
+
+// Añadimos el listener para el botón de envío del formulario
+btnDelete.addEventListener("click", (e) => {
+  e.preventDefault(); // Evitamos el comportamiento predeterminado de enviar el formulario y recargar la página
+  deleteExpense(); // Llamamos a la función para borrar el gasto
+});
+
+// ACCIONES PARA LA PIZARRA //
+
+const btnCleanBoard = document.getElementById("btn-clean-board"); // Selección del botón para borrar la pizarra
+
+btnCleanBoard.addEventListener("click", () => {
+  let container = document.getElementById("expenseData");
+  container.innerHTML = "";
+});
