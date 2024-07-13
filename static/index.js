@@ -1,5 +1,5 @@
-const HOST = "localhost";
-const PORT = 8000;
+const HOST = "admanser.pythonanywhere.com";
+const PORT = 80;
 const apiUrl = `http://${HOST}:${PORT}/api/expense/`;
 //const apiUrl = 'http://127.0.0.1:8000/api/expense/'
 
