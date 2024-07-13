@@ -1,42 +1,42 @@
-const HOST = "localhost"
-const PORT = 8000
-const apiUrl = `http://${HOST}:${PORT}/api/expense/`
-//const apiUrl = 'http://127.0.0.1:8000/api/expense/'
+const HOST = "admanser.pythonanywhere.com";
+const PORT = 80;
+const apiUrl = `http://${HOST}:${PORT}/api/expense/`;
+// const apiUrl = 'http://127.0.0.1:8000/api/expense/'
 
-// GET // 
+// GET //
 
 const btnGet = document.getElementById("btn-get"); // Obtenemos la referencia al botón de obtención de datos
 
 // Añadimos el listener para el botón de obtención de datos
 btnGet.addEventListener("click", () => {
   fetch(apiUrl)
-    .then(res => {
+    .then((res) => {
       if (!res.ok) {
-        throw new Error('Network response was not ok ' + res.statusText);
+        throw new Error("Network response was not ok " + res.statusText);
       }
       console.log(res);
       return res.json();
     })
-    .then(data => {
+    .then((data) => {
       let container = document.getElementById("expenseData");
-      container.innerHTML = ''; // Limpiar el contenedor antes de agregar nuevos registros de gastos
+      container.innerHTML = ""; // Limpiar el contenedor antes de agregar nuevos registros de gastos
       createHeader(container); // Crea la primer linea con los titulos de los campos
-      data.forEach(exp => {
+      data.forEach((exp) => {
         let expense = new Expense(exp); // Crear instancia de la clase Expense
         container.appendChild(expense.createDiv()); // Agregar el div del expense al contenedor
       });
     })
-    .catch(error => {
-      console.error('There was a problem with the fetch operation:', error);
+    .catch((error) => {
+      console.error("There was a problem with the fetch operation:", error);
     });
 });
 
 function createHeader(container) {
-  const headers = ['ID', 'Category', 'Detail', 'Currency', 'Amount', 'Date'];
-  const headerDiv = document.createElement('div');
-  headerDiv.classList.add('expense-header');
-  headers.forEach(header => {
-    const div = document.createElement('div');
+  const headers = ["ID", "Category", "Detail", "Currency", "Amount", "Date"];
+  const headerDiv = document.createElement("div");
+  headerDiv.classList.add("expense-header");
+  headers.forEach((header) => {
+    const div = document.createElement("div");
     div.textContent = header;
     headerDiv.appendChild(div);
   });
@@ -57,38 +57,37 @@ class Expense {
   createDiv() {
     const fragment = document.createDocumentFragment();
 
-    const id = document.createElement('div');
+    const id = document.createElement("div");
     id.textContent = this.id;
     fragment.appendChild(id);
 
-    const category = document.createElement('div');
+    const category = document.createElement("div");
     category.textContent = this.category;
     fragment.appendChild(category);
 
-    const detail = document.createElement('div');
+    const detail = document.createElement("div");
     detail.textContent = this.expense_detail;
     fragment.appendChild(detail);
 
-    const currency = document.createElement('div');
+    const currency = document.createElement("div");
     currency.textContent = this.currency;
     fragment.appendChild(currency);
 
-    const amount = document.createElement('div');
+    const amount = document.createElement("div");
     amount.textContent = this.amount;
     fragment.appendChild(amount);
 
-    const date = document.createElement('div');
+    const date = document.createElement("div");
     date.textContent = this.date;
     fragment.appendChild(date);
 
-    const itemContainer = document.createElement('div');
-    itemContainer.classList.add('expense-item');
+    const itemContainer = document.createElement("div");
+    itemContainer.classList.add("expense-item");
     itemContainer.appendChild(fragment);
 
     return itemContainer;
   }
 }
-
 
 // POST //
 
@@ -104,44 +103,44 @@ btnCloseForm.addEventListener("click", () => {
   formSection.style.display = "none"; // Cambiar el estilo del formulario para ocultarlo
 });
 
-const btnPost = document.getElementById("btn-post") // Obtenemos la referencia al botón de envío del formulario
+const btnPost = document.getElementById("btn-post"); // Obtenemos la referencia al botón de envío del formulario
 
 function addExpense() {
   // Definimos la función para agregar un gasto
-  const form = document.getElementById('charge_expense_form');
+  const form = document.getElementById("charge_expense_form");
   const formData = new FormData(form);
 
   // Construimos el objeto de gastos a partir de los datos del formulario
   const expense = {
-    category: formData.get('category'),
-    expense_detail: formData.get('expense_detail'),
-    currency: formData.get('currency'),
-    amount: parseFloat(formData.get('amount')),
-    date: formData.get('date')
+    category: formData.get("category"),
+    expense_detail: formData.get("expense_detail"),
+    currency: formData.get("currency"),
+    amount: parseFloat(formData.get("amount")),
+    date: formData.get("date"),
   };
 
   fetch(apiUrl, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify(expense) // Convertimos el objeto de gastos a JSON
+    body: JSON.stringify(expense), // Convertimos el objeto de gastos a JSON
   })
-    .then(res => {
+    .then((res) => {
       if (!res.ok) {
-        throw new Error('Network response was not ok ' + res.statusText);
+        throw new Error("Network response was not ok " + res.statusText);
       }
       return res.json();
     })
-    .then(data => {
-      alert('Expense added successfully!');
+    .then((data) => {
+      alert("Expense added successfully!");
       console.log(data);
       form.reset(); // Limpiamos el formulario después de enviar los datos
       // fetchExpenses(); // Llamamos a una función para actualizar la lista de gastos (si existe)
     })
-    .catch(error => {
-      console.error('There was a problem with the fetch operation:', error);
-      alert('There was an error adding the expense. Please try again.');
+    .catch((error) => {
+      console.error("There was a problem with the fetch operation:", error);
+      alert("There was an error adding the expense. Please try again.");
     });
 }
 
@@ -150,7 +149,6 @@ btnPost.addEventListener("click", (e) => {
   e.preventDefault(); // Evitamos el comportamiento predeterminado de enviar el formulario y recargar la página
   addExpense(); // Llamamos a la función para agregar el gasto
 });
-
 
 // PUT //
 
@@ -211,10 +209,8 @@ formPutSection.addEventListener("submit", function (event) {
   updateExpense();
 });
 
-
 // DELETE //
 
-<<<<<<< HEAD
 const btnDeleteExpense = document.getElementById("btn-delete"); // Selección del botón para eliminar un gasto
 
 // btnDeleteExpense.addEventListener("click", () => {
@@ -223,68 +219,46 @@ const btnDeleteExpense = document.getElementById("btn-delete"); // Selección de
 
 function deleteExpense() {
   const expenseId = prompt("Enter Expense ID to delete:");
-=======
-const btnDeleteForm = document.getElementById("btn-delete-form"); // Selección del botón para mostrar el formulario
-const btnCloseDeleteForm = document.getElementById("btn-close-delete-form"); // Selección del botón para ocultar el formulario
-const formDeleteSection = document.getElementById("delete_expense"); // Selección de la seccion formulario
-const Deleteform = document.getElementById("Delete_expense_form"); // Selección del formulario
->>>>>>> 862a0fe5eb7462c52054d21bda332cb7e73ad262
 
-btnDeleteForm.addEventListener("click", () => {
-  formDeleteSection.style.display = "block"; // Cambiar el estilo del formulario para mostrarlo
-});
+  btnDeleteForm.addEventListener("click", () => {
+    formDeleteSection.style.display = "block"; // Cambiar el estilo del formulario para mostrarlo
+  });
 
-btnCloseDeleteForm.addEventListener("click", () => {
-  formDeleteSection.style.display = "none"; // Cambiar el estilo del formulario para ocultarlo
-});
+  btnCloseDeleteForm.addEventListener("click", () => {
+    formDeleteSection.style.display = "none"; // Cambiar el estilo del formulario para ocultarlo
+  });
 
-const btnDelete = document.getElementById("btn-delete") // Obtenemos la referencia al botón de envío del formulario
+  const btnDelete = document.getElementById("btn-delete"); // Obtenemos la referencia al botón de envío del formulario
 
-// Definimos la función para eleminar un registro de gasto
-function deleteExpense() {
-  let form = document.getElementById('delete_expense_form');
-  let formData = new FormData(form);
-  let expenseId = formData.get('expense_id');
+  // Definimos la función para eleminar un registro de gasto
+  function deleteExpense() {
+    let form = document.getElementById("delete_expense_form");
+    let formData = new FormData(form);
+    let expenseId = formData.get("expense_id");
 
-  fetch(`${apiUrl}${expenseId}/`, {
-      method: 'DELETE',
+    fetch(`${apiUrl}${expenseId}/`, {
+      method: "DELETE",
       headers: {
-          'Content-Type': 'application/json'
-      }
-  })
-<<<<<<< HEAD
-    .then(response => {
-      alert('Expense deleted!');
+        "Content-Type": "application/json",
+      },
+    }).then((response) => {
+      alert("Expense deleted!");
       //fetchExpenses();
     });
-=======
-  .then(res => {
-      if (!res.ok) {
-          throw new Error('Network response was not ok ' + response.statusText);
-      }
-      alert('Expense deleted successfully!');
-      form.reset(); // Limpiamos el formulario después de enviar los datos
-      //fetchExpenses(); // Llamamos a una función para actualizar la lista de gastos
-  })
-  .catch(error => {
-      console.error('There was a problem with the fetch operation:', error);
-      alert('There was an error deleting the expense. Please try again.');
+  }
+
+  // Añadimos el listener para el botón de envío del formulario
+  btnDelete.addEventListener("click", (e) => {
+    e.preventDefault(); // Evitamos el comportamiento predeterminado de enviar el formulario y recargar la página
+    deleteExpense(); // Llamamos a la función para borrar el gasto
   });
->>>>>>> 862a0fe5eb7462c52054d21bda332cb7e73ad262
+
+  // ACCIONES PARA LA PIZARRA //
+
+  const btnCleanBoard = document.getElementById("btn-clean-board"); // Selección del botón para borrar la pizarra
+
+  btnCleanBoard.addEventListener("click", () => {
+    let container = document.getElementById("expenseData");
+    container.innerHTML = "";
+  });
 }
-
-// Añadimos el listener para el botón de envío del formulario
-btnDelete.addEventListener("click", (e) => {
-  e.preventDefault(); // Evitamos el comportamiento predeterminado de enviar el formulario y recargar la página
- deleteExpense(); // Llamamos a la función para borrar el gasto
-});
-
-
-// ACCIONES PARA LA PIZARRA //
-
-const btnCleanBoard = document.getElementById("btn-clean-board"); // Selección del botón para borrar la pizarra
-
-btnCleanBoard.addEventListener("click", () => {
-  let container = document.getElementById("expenseData");
-  container.innerHTML = '';
-});
